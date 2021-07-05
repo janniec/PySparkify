@@ -1,7 +1,7 @@
 # Sparkify: A Week in the Life of a Hypothetical Data Scientist  
 ## Predicting User Churn with PySpark  
    
-![Sparkify](https://github.com/janniec/PySparkify/blob/master/images/sparkify_churn.png)  
+![Sparkify](https://github.com/janniec/PySparkify/tree/master/images/sparkify_churn.png)  
 image source: [Medium](https://medium.com/analytics-vidhya/sparkify-predicting-the-user-churn-using-apache-spark-ee4178f859c8)  
   
   
@@ -12,7 +12,7 @@ Udacity asked me to imagine that I worked on the data team for a hypothetical po
   
 ## Problem Statement (Monday 9AM)   
    
-![Stand up meeting](https://github.com/janniec/PySparkify/blob/master/images/agile-stand-up-meeting.jpeg)  
+![Stand up meeting](https://github.com/janniec/PySparkify/tree/master/images/agile-stand-up-meeting.jpeg)  
 image source: [workfront.com](https://www.workfront.com/project-management/methodologies/agile/daily-stand-up)  
     
 Monday morning at the daily stand up meeting, the Product Manager let's me know that she has project for me and she would like to meet after stand up to discuss details.   
@@ -61,7 +61,7 @@ For this project, I expect to use the following tools:
   
 ## Data Preprocessing (Monday after Lunch)  
    
-![Working through Lunch, Lets be Honest.](https://github.com/janniec/PySparkify/blob/master/images/lunch-at-my-desk.jpeg)  
+![Working through Lunch, Lets be Honest.](https://github.com/janniec/PySparkify/tree/master/images/lunch-at-my-desk.jpeg)  
 image source: [huffpost.com](https://www.huffpost.com/entry/why-you-should-never-eat-lunch-at-your-desk_l_60522125c5b6ce101643c3f8)  
    
 During my preliminary exploration of the data, I found that there were data points that could not be attributed to any users because the `userId`s were empty strings. Those log entries can be cleaned out, as well as duplicates.  
@@ -76,44 +76,44 @@ But before I leave for the day, I need to create label that we want our model to
   
 ## Exploratory Analysis (Tuesday)   
    
-![Working on Visualizations](https://github.com/janniec/PySparkify/blob/master/images/working-on-the-desk.jpeg)  
+![Working on Visualizations](https://github.com/janniec/PySparkify/tree/master/images/working-on-the-desk.jpeg)  
 image source: [osmondmarketing.com](https://www.osmondmarketing.com/why-a-well-organized-office-is-beneficial-to-your-work)   
    
 To understand how the data I have could help me predict users who are at risk of churn, I looked at the difference between users who stayed and users who churned, the number of users who churned or stayed across the different events, how the users in the two different groups behaved, what events they created, and how that behavior changed over time.  I did a fairly comprehensive analysis, but here are the most interesting findings in my exploration.  
    
 ### Number of Users in Each Group across Categories   
    
-![Count of Users who Churned vs Stayed](https://github.com/janniec/PySparkify/blob/master/images/count_of_users_churned_stayed.png)  
+![Count of Users who Churned vs Stayed](https://github.com/janniec/PySparkify/tree/master/images/count_of_users_churned_stayed.png)  
   
 We are working with 225 users in the subset. As expected, users who churned only make about 23% of all the users in our data subset. This confirms that I will be attempting to predict an imbalanced class.   
   
-![Count of Users who Churned vs Stayed Over Time](https://github.com/janniec/PySparkify/blob/master/images/count_of_churned_over_time.png)  
+![Count of Users who Churned vs Stayed Over Time](https://github.com/janniec/PySparkify/tree/master/images/count_of_churned_over_time.png)  
   
 There appears to be a decline in the number of users who churn. But we don't have enough of a window to tell if this is cyclical. This is something to investigate with a bigger set of data next week.  
    
-![Count of Users who Churned vs Stayed and Paid vs Free](https://github.com/janniec/PySparkify/blob/master/images/count_of_users_churned_paid_free.png)  
+![Count of Users who Churned vs Stayed and Paid vs Free](https://github.com/janniec/PySparkify/tree/master/images/count_of_users_churned_paid_free.png)  
   
 I was surprised that there are more people who churned within the free tier, given that the service wasn't costing them. But because Sparkify allows their users to downgrade and upgrade at will, this visualization only represents a snapshot in time.   
    
-![Count of Users who Churned vs Stayed and Paid vs Free Over Time](https://github.com/janniec/PySparkify/blob/master/images/count_of_users_churned_paid_free_over_time.png)  
+![Count of Users who Churned vs Stayed and Paid vs Free Over Time](https://github.com/janniec/PySparkify/tree/master/images/count_of_users_churned_paid_free_over_time.png)  
   
 As expected, the same data visualized over time was more enlightening. Interestingly, users who churned, regardless of tier, and users who stayed on the free tier are roughly similar. There are significantly more users who stayed on the paid tier, indicating that users maybe be more likely to stay if they are on paid tier.   
   
   
 ### Number of Log Events across Categories for Each Group    
     
-![Count of Page Events for Users who Churned vs Stayed](https://github.com/janniec/PySparkify/blob/master/images/count_of_page_events.png)    
+![Count of Page Events for Users who Churned vs Stayed](https://github.com/janniec/PySparkify/tree/master/images/count_of_page_events.png)    
    
 The count of `NextSong` log entries within the `page` column is skewing the visualization. This is unsurprising given that the main point of the service is to stream songs. However, I removed it from the visualization to see how the other `page` values broke down.  
    
-![Count of Page Events for Users who Churned vs Stayed without NextSong](https://github.com/janniec/PySparkify/blob/master/images/count_of_page_events_wo_nextsong.png)   
+![Count of Page Events for Users who Churned vs Stayed without NextSong](https://github.com/janniec/PySparkify/tree/master/images/count_of_page_events_wo_nextsong.png)   
    
 Without `NextSong` entries, I could see that `Cancellation Confirmation` and `Cancel` are still rare occurances. Interestingly, account `Downgrade`s are more associated with users who stayed than users who churned, indicating that those who churned may have either stayed in the free tier, therefore having no reason to downgrade their account, or churned while in the paid tier. In addition, it appears that none of the user who churned encountered the `error` page.  
    
-![Count of Status Values for Users who Churned vs Stayed](https://github.com/janniec/PySparkify/blob/master/images/count_of_status_values.png)     
+![Count of Status Values for Users who Churned vs Stayed](https://github.com/janniec/PySparkify/tree/master/images/count_of_status_values.png)     
 `status` refers to the HTTP status codes of Sparkify service at the time of the log creation. `200` means that internet is connecting and I'm not surprised that it is the most frequent value and therefore skews the visualization. Lets rerun it without `200`.  
    
-![Count of Status Values for Users who Churned vs Stayed without 404](https://github.com/janniec/PySparkify/blob/master/images/count_of_status_values_wo_404.png)  
+![Count of Status Values for Users who Churned vs Stayed without 404](https://github.com/janniec/PySparkify/tree/master/images/count_of_status_values_wo_404.png)  
    
 `307` indicates that a page was redirected and `404` indicates an error. Unexpectedly, it doesn't appear that users who churned were those who encountered more service disruptions.  
    
@@ -122,7 +122,7 @@ Overall, it appears that users who churned did not cancel the services because o
   
 ## Feature Engineering (Wednesday)   
    
-![Chill Day at Work](https://github.com/janniec/PySparkify/blob/master/images/relaxed-calm-work.jpeg)  
+![Chill Day at Work](https://github.com/janniec/PySparkify/tree/master/images/relaxed-calm-work.jpeg)  
 image source: [dreamstime.com](https://www.dreamstime.com/photos-images/relief-peace.html)  
   
 I am anticipating that the data processing required to generate features will be the most time consuming aspect of this project. (Once I write the code to generate the features, I can relax and just troubleshoot as needed.) And we should aim to minimize this step in the future for the full data set. As such, I plan to be more comprehensive with the features generate for the subset, and incorporate feature selection as part of the modeling experiments. 
@@ -155,7 +155,7 @@ The categorical variables need to be converted because the models only take nume
     - state (all 50 states are not present here)  
     I generated all 44 states just in case. I'm not sure if there will be a multicollinarity problem here because all 50 states aren't present in the subset of the data. Multicollinarity won't be an issue for tree based models as they would just drop duplicative features. However, if we proceed with a regression based model, I will review 2 versions of the model, one with all 44 states, one with only 43 states, and see if there is a change in performance.  
     
-![Multicollinearity](https://github.com/janniec/PySparkify/blob/master/images/multicollinearity_problem.jpeg)   
+![Multicollinearity](https://github.com/janniec/PySparkify/tree/master/images/multicollinearity_problem.jpeg)   
 image source: [analyticsvidhya.com](https://www.analyticsvidhya.com/blog/2020/03/what-is-multicollinearity/)     
     
 As expected, feature generation took several hours. So I saved the features dataset to simply load tomorrow.  
@@ -163,7 +163,7 @@ As expected, feature generation took several hours. So I saved the features data
   
 ## Modeling (Thursday)  
    
-![Fun at Work](https://github.com/janniec/PySparkify/blob/master/images/fun-at-work.jpeg)  
+![Fun at Work](https://github.com/janniec/PySparkify/tree/master/images/fun-at-work.jpeg)  
 image source: [stackoverflow.blog](https://stackoverflow.blog/2020/02/27/the-eight-factors-of-happiness-for-developers/)    
    
 We're finally at the meat of this project, so to speak.  I approached this project iteratively - quickly creating a deliverable and improving upon it in stages.  I didn't know exactly how long modeling would take and I wanted to make sure that I would have something to hand over to the Product Manager.  In addition, I wanted to give Sparkify a few models to consider.  
@@ -177,7 +177,7 @@ validation data:  (67, 85)
    
 Whether a user has churned or stayed is an imbalanced class. Only 23% of users in our dataset churned. As such, I will be evaluating the models with f1 scores, which is the harmonic mean of precision, which evaluates true positives against false positives, and recall, which evaluates true positives against false negatives. This means that f1 score will be a more class balanced evaluation measure.  
    
-![Evaluation Scores](https://github.com/janniec/PySparkify/blob/master/images/evaluation.jpeg)  
+![Evaluation Scores](https://github.com/janniec/PySparkify/tree/master/images/evaluation.jpeg)  
 image source: [packtpub.com](https://subscription.packtpub.com/book/big_data_and_business_intelligence/9781785282287/10/ch10lvl1sec133/computing-precision-recall-and-f1-score)    
    
 However, given that Sparkify is considering providing incentives to users who are at risk of churn, there may be costs associated with false positives-- mistaking content users for those who are at risk and given them unnecessary incentives to stay. So while I want to focus on f1 scores, I don't want to overlook accuracy completely.   
@@ -220,16 +220,16 @@ As expected all the classifiers didn't do particularly well when using default p
    
 To find better parameters, I explored `maxDepth`, `maxBins`, and `numTrees` values both lower than and higher than the defaults in the Parameter Grid. I also considered `entropy` as an alternative `impurity`, the metric used to calculate information gain at each node.  
    
-![Parameter Grid and Cross Validation](https://github.com/janniec/PySparkify/blob/master/images/v2_paramgrid_crossv.png)  
+![Parameter Grid and Cross Validation](https://github.com/janniec/PySparkify/tree/master/images/v2_paramgrid_crossv.png)  
    
 In addition to Parameter Grid, I also used Cross Validation. The random forest algorithm has 2 random components when training models: (1) each tree trains on a random sample of the data and (2) each tree trains on a random subset of the features. A single experiment could result in a lucky jump in the f1 score. Instead, I will use a cross validator to split the train dataset into 3 folds, train a model on 2 folds and test on the third, rotate the folds and repeat twice more. Ultimately, for each combination of parameters, 3 models will be trained and evaluated, and we will get an average score. This will ensure that we get a combination of parameters that actually improved the model.  
    
-![Random Forest Classification](https://github.com/janniec/PySparkify/blob/master/images/random_forest.png)  
+![Random Forest Classification](https://github.com/janniec/PySparkify/tree/master/images/random_forest.png)  
 image source: [towardsdatascience.com](https://towardsdatascience.com/the-ultimate-guide-to-adaboost-random-forests-and-xgboost-7f9327061c4f)    
     
 The best parameters are gini with 30 maxBins, 10 maxDepth, and 5 trees.   
    
-![Parameter Grid Results](https://github.com/janniec/PySparkify/blob/master/images/parameter_grid.png)  
+![Parameter Grid Results](https://github.com/janniec/PySparkify/tree/master/images/parameter_grid.png)  
    
 The best parameters for our Random Forest Classifier are as follows:  
 - `maxBins`: 30 (the default was 32)   
@@ -245,23 +245,23 @@ This parameter determines how trees split data a branch. In short, `gini` measur
    
 When using the Spark cluster on AWS, the longer we need to run the code, the more it will cost us. The data transformation, required to create the features took a few hours when run locally. So Sparkify may want to limit the number of features. As such, I will look at the top important features and rerun our best classifier with the best parameters on fewer features.  Ideally, I will find a smaller set of features to run in the model without sacrificing too much of the f1 score.   
    
-![Feature Importance](https://github.com/janniec/PySparkify/blob/master/images/feature_importance.png)   
+![Feature Importance](https://github.com/janniec/PySparkify/tree/master/images/feature_importance.png)   
    
 Feature Importance shows that 41 out of the 85 features were used to train the second model. Just looking at the top few, high values in `Thumb Down` and `Logout` would strongly indicate disatisfaction with the service. Conversely, `200`, HTTP status code that the service is working, `PUT` HTTP method request to store data, `avg_song_length` and `NextSong` indicate engagement with the service. If those values were high, they would signal a user's satisfaction with the service. Whereas, low numbers would signal a user's disatisfaction.  
   
 I experimented with various feature sets to see how the model performed with fewer features. This meant that for each set of features, I needed to split, vectorize and scale the data sets again before I train the models. In order to speed this up, I used PySpark's Pipeline for preprocessing and Cross validation for a more reliable evaluation of the models.  
   
-![Pipeline and Cross Validation](https://github.com/janniec/PySparkify/blob/master/images/v3_pipeline_crossv.png)  
+![Pipeline and Cross Validation](https://github.com/janniec/PySparkify/tree/master/images/v3_pipeline_crossv.png)  
   
 Cross validation on the various sets of features showed that only 4 features are really necessary to predict user Churn.   
 The most important features are:  `['page_count_Thumbs_Down', 'page_count_Logout', 'status_count_200', 'method_count_PUT']`  
   
-![Feature Selection](https://github.com/janniec/PySparkify/blob/master/images/feature_selection.png)  
+![Feature Selection](https://github.com/janniec/PySparkify/tree/master/images/feature_selection.png)  
   
   
 ## Validation (Friday Morning)  
   
-![Almost Done](https://github.com/janniec/PySparkify/blob/master/images/almost_done.jpg)  
+![Almost Done](https://github.com/janniec/PySparkify/tree/master/images/almost_done.jpg)  
 image source: [brinknews.com](https://www.brinknews.com/what-companies-need-to-do-to-improve-working-conditions-for-women/)   
    
 We're almost at the finish line. I'v built 3 models thus far. It's time to evaluate all 3 models on the validation data set and see if I improved the models with the iterations.  
@@ -287,7 +287,7 @@ Unsurprisingly, our 3rd model didn't perform as well. The F1 score dropped by 6%
    
 ## Findings (Friday Afternoon)   
    
-![Presenting my Findings](https://github.com/janniec/PySparkify/blob/master/images/woman-presenting.png)  
+![Presenting my Findings](https://github.com/janniec/PySparkify/tree/master/images/woman-presenting.png)  
 image source: [peopleelement.com](https://peopleelement.com/people-element-platform/meeting-with-woman-presenting/)    
    
 ### Summary   
@@ -317,8 +317,8 @@ If the Product Managers tells me that speed is of the essense, I will continue w
     
 Although Sparkify asked us to predict users who were at risk of churning, its ultimate goal is to encourage users to stay. Exploratory Data Analysis indicated that user who churned weren't encountering `Error` pages or `404` status issues.  Feature importance showed us that the top feature influencing the models was `Thumbs Down`, meaning that a high occurence of this event in a user's account indicates dissatisfaction with the songs. While Sparkify said that they were considering providing discounts and incentives for users to stay, might I recommend that Sparkify improves its song recommendation engine. Perhaps the better approach to convincing users to stay is preventing users from streaming songs they would `Thumbs Down`. But that's next week's problem!   
   
-![Cheers to the Weekend](https://github.com/janniec/PySparkify/blob/master/Happy-Hour.jpg)  
+![Cheers to the Weekend](https://github.com/janniec/PySparkify/tree/master/Happy-Hour.jpg)  
 image source: [rokaakor.com](https://www.rokaakor.com/history-of-happy-hour-an-insider-look-into-this-post-work-tradition/)   
   
   
-To see more about this analysis, please check out my [Github](https://github.com/janniec/Sparkify/blob/master/README.md).  
+To see more about this analysis, please check out my [Github](https://github.com/janniec/Sparkify/tree/master/README.md).  
