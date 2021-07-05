@@ -1,7 +1,7 @@
 # Sparkify: A Week in the Life of a Hypothetical Data Scientist  
 ## Predicting User Churn with PySpark  
    
-![Sparkify](https://github.com/janniec/PySparkify/blob/main/images/sparkify_chun.png)  
+![Sparkify](https://github.com/janniec/PySparkify/blob/main/images/sparkify_churn.png)  
 image source: [Medium](https://medium.com/analytics-vidhya/sparkify-predicting-the-user-churn-using-apache-spark-ee4178f859c8)   
   
 ## Introduction  
@@ -154,8 +154,8 @@ The categorical variables need to be converted because the models only take nume
     - state (all 50 states are not present here)  
     I generated all 44 states just in case. I'm not sure if there will be a multicollinarity problem here because all 50 states aren't present in the subset of the data. Multicollinarity won't be an issue for tree based models as they would just drop duplicative features. However, if we proceed with a regression based model, I will review 2 versions of the model, one with all 44 states, one with only 43 states, and see if there is a change in performance.  
     
-![Multicollinearity](https://github.com/janniec/PySparkify/blob/main/images/multicollinearity_problem.jpg)   
-image source: [analyticsvidhya.com](https://www.analyticsvidhya.com/blog/2020/03/what-is-multicollinearity/)     
+![Multicollinearity](https://github.com/janniec/PySparkify/blob/main/images/multicollinearity_problem.png)   
+image source: [analyticsvidhya.com](https://medium.com/analytics-vidhya/multicollinearity-a-beginners-guide-fea13d01a171/)     
     
 As expected, feature generation took several hours. So I saved the features dataset to simply load tomorrow.  
   
@@ -263,7 +263,7 @@ The most important features are:  `['page_count_Thumbs_Down', 'page_count_Logout
 ![Almost Done](https://github.com/janniec/PySparkify/blob/main/images/almost_done.jpg)  
 image source: [brinknews.com](https://www.brinknews.com/what-companies-need-to-do-to-improve-working-conditions-for-women/)   
    
-We're almost at the finish line. I'v built 3 models thus far. It's time to evaluate all 3 models on the validation data set and see if I improved the models with the iterations.  
+We're almost at the finish line. I've built 3 models thus far. It's time to evaluate all 3 models on the validation data set and see if I improved the models with the iterations.  
    
 **Model 1: Random Forest Model with Default Parameters**   
 - Training the model took 2.3147828578948975 seconds.   
@@ -316,7 +316,7 @@ If the Product Managers tells me that speed is of the essense, I will continue w
     
 Although Sparkify asked us to predict users who were at risk of churning, its ultimate goal is to encourage users to stay. Exploratory Data Analysis indicated that user who churned weren't encountering `Error` pages or `404` status issues.  Feature importance showed us that the top feature influencing the models was `Thumbs Down`, meaning that a high occurence of this event in a user's account indicates dissatisfaction with the songs. While Sparkify said that they were considering providing discounts and incentives for users to stay, might I recommend that Sparkify improves its song recommendation engine. Perhaps the better approach to convincing users to stay is preventing users from streaming songs they would `Thumbs Down`. But that's next week's problem!   
   
-![Cheers to the Weekend](https://github.com/janniec/PySparkify/blob/main/Happy-Hour.jpg)  
+![Cheers to the Weekend](https://github.com/janniec/PySparkify/blob/main/images/Happy-Hour.jpg)  
 image source: [rokaakor.com](https://www.rokaakor.com/history-of-happy-hour-an-insider-look-into-this-post-work-tradition/)   
   
   
