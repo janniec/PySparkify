@@ -1,7 +1,7 @@
 # Sparkify: A Week in the Life of a Hypothetical Data Scientist  
 ## Predicting User Churn with PySpark  
    
-![Sparkify](https://github.com/janniec/PySparkify/blob/main/images/sparkify_churn.png)  
+![Sparkify](https://github.com/janniec/PySparkify/blob/main/images/sparkify_chun.png)  
 image source: [Medium](https://medium.com/analytics-vidhya/sparkify-predicting-the-user-churn-using-apache-spark-ee4178f859c8)   
   
 ## Introduction  
@@ -11,7 +11,7 @@ Udacity asked me to imagine that I worked on the data team for a hypothetical po
   
 ## Problem Statement (Monday 9AM)   
    
-![Stand up meeting](https://github.com/janniec/PySparkify/blob/main/images/agile-stand-up-meeting.jpeg)  
+![Stand up meeting](https://github.com/janniec/PySparkify/blob/main/images/agile-stand-up-meeting.jpg)  
 image source: [workfront.com](https://www.workfront.com/project-management/methodologies/agile/daily-stand-up)  
     
 Monday morning at the daily stand up meeting, the Product Manager let's me know that she has project for me and she would like to meet after stand up to discuss details.   
@@ -75,7 +75,7 @@ But before I leave for the day, I need to create label that we want our model to
   
 ## Exploratory Analysis (Tuesday)   
    
-![Working on Visualizations](https://github.com/janniec/PySparkify/blob/main/images/working-on-the-desk.jpeg)  
+![Working on Visualizations](https://github.com/janniec/PySparkify/blob/main/images/working-on-the-desk.jpg)  
 image source: [osmondmarketing.com](https://www.osmondmarketing.com/why-a-well-organized-office-is-beneficial-to-your-work)   
    
 To understand how the data I have could help me predict users who are at risk of churn, I looked at the difference between users who stayed and users who churned, the number of users who churned or stayed across the different events, how the users in the two different groups behaved, what events they created, and how that behavior changed over time.  I did a fairly comprehensive analysis, but here are the most interesting findings in my exploration.  
@@ -121,7 +121,7 @@ Overall, it appears that users who churned did not cancel the services because o
   
 ## Feature Engineering (Wednesday)   
    
-![Chill Day at Work](https://github.com/janniec/PySparkify/blob/main/images/relaxed-calm-work.jpeg)  
+![Chill Day at Work](https://github.com/janniec/PySparkify/blob/main/images/relaxed-calm-work.jpg)  
 image source: [dreamstime.com](https://www.dreamstime.com/photos-images/relief-peace.html)  
   
 I am anticipating that the data processing required to generate features will be the most time consuming aspect of this project. (Once I write the code to generate the features, I can relax and just troubleshoot as needed.) And we should aim to minimize this step in the future for the full data set. As such, I plan to be more comprehensive with the features generate for the subset, and incorporate feature selection as part of the modeling experiments. 
@@ -154,7 +154,7 @@ The categorical variables need to be converted because the models only take nume
     - state (all 50 states are not present here)  
     I generated all 44 states just in case. I'm not sure if there will be a multicollinarity problem here because all 50 states aren't present in the subset of the data. Multicollinarity won't be an issue for tree based models as they would just drop duplicative features. However, if we proceed with a regression based model, I will review 2 versions of the model, one with all 44 states, one with only 43 states, and see if there is a change in performance.  
     
-![Multicollinearity](https://github.com/janniec/PySparkify/blob/main/images/multicollinearity_problem.jpeg)   
+![Multicollinearity](https://github.com/janniec/PySparkify/blob/main/images/multicollinearity_problem.jpg)   
 image source: [analyticsvidhya.com](https://www.analyticsvidhya.com/blog/2020/03/what-is-multicollinearity/)     
     
 As expected, feature generation took several hours. So I saved the features dataset to simply load tomorrow.  
@@ -162,7 +162,7 @@ As expected, feature generation took several hours. So I saved the features data
   
 ## Modeling (Thursday)  
    
-![Fun at Work](https://github.com/janniec/PySparkify/blob/main/images/fun-at-work.jpeg)  
+![Fun at Work](https://github.com/janniec/PySparkify/blob/main/images/fun-at-work.jpg)  
 image source: [stackoverflow.blog](https://stackoverflow.blog/2020/02/27/the-eight-factors-of-happiness-for-developers/)    
    
 We're finally at the meat of this project, so to speak.  I approached this project iteratively - quickly creating a deliverable and improving upon it in stages.  I didn't know exactly how long modeling would take and I wanted to make sure that I would have something to hand over to the Product Manager.  In addition, I wanted to give Sparkify a few models to consider.  
@@ -176,7 +176,7 @@ validation data:  (67, 85)
    
 Whether a user has churned or stayed is an imbalanced class. Only 23% of users in our dataset churned. As such, I will be evaluating the models with f1 scores, which is the harmonic mean of precision, which evaluates true positives against false positives, and recall, which evaluates true positives against false negatives. This means that f1 score will be a more class balanced evaluation measure.  
    
-![Evaluation Scores](https://github.com/janniec/PySparkify/blob/main/images/evaluation.jpeg)  
+![Evaluation Scores](https://github.com/janniec/PySparkify/blob/main/images/evaluation.jpg)  
 image source: [packtpub.com](https://subscription.packtpub.com/book/big_data_and_business_intelligence/9781785282287/10/ch10lvl1sec133/computing-precision-recall-and-f1-score)    
    
 However, given that Sparkify is considering providing incentives to users who are at risk of churn, there may be costs associated with false positives-- mistaking content users for those who are at risk and given them unnecessary incentives to stay. So while I want to focus on f1 scores, I don't want to overlook accuracy completely.   
