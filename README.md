@@ -35,6 +35,19 @@ The libraries required for this code are listed in 'requirements.txt'. In order 
 - PySpark  
 - Pandas  
 - Matplotlib  
+
+![PySpark Framework](https://github.com/janniec/PySparkify/blob/main/images/internals-of-job-execution-in-apache-spark.jpg)  
+image source: [data-flair.training](https://data-flair.training/blogs/dag-in-apache-spark/)   
+  
+## PySpark
+  
+PySpark is a distributed processing system that will distribute data across a cluster and process the data in parallel. In brief,  
+**Driver Program (Master)** initializes the Spark Context, builds DAGs with the code, schedules job execution with the Cluster Manager, and distributes tasks to the Executors.  
+**Spark Context** connects Spark Applicatin with the Spark Cluster, a distributed computing system where each node has its own memory and processors.  
+**Resilient Distributed Dataset (RDD)** is a partitioned copy of the input data. All the partitions are stored across the cluster.   
+**Directed Acyclic Graph (DAG)** are chains of tasks from the code that the DAG Scheduler holds as stages of tasks.  
+**Cluster Manager** allocates and monitors the available resources and launches the Executors with tasks.  
+**Executors (Workers)** perform the data processing across the nodes in parallel, stores the results in memory, returns the result to the Driver once the tasks have been completed.   
   
   
 ## File Descriptions  

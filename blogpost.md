@@ -55,9 +55,12 @@ The data contains the following event-level values:
 For this project, I expect to use the following tools:   
 - PySpark   
 - Pandas   
-- Matplotlib   
-   
+- Matplotlib  
   
+**Why use PySpark?**  
+12GB is a substantial amount of data and while determining which users are at risk may not need to be a real-time process, Sparkify probably will want to run this model regularly with preferably fast computation. For these reasons, I would recommend that we use a distributed processing system that will distribute data across a cluster and process the data in parallel.  
+   
+   
 ## Data Preprocessing (Monday after Lunch)  
    
 ![Working through Lunch, Lets be Honest.](https://github.com/janniec/PySparkify/blob/main/images/lunch-at-my-desk.jpeg)  
