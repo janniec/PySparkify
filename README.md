@@ -53,11 +53,15 @@ PySpark is a distributed processing system that will distribute data across a cl
 ## File Descriptions  
 - README.md - information about this repository  
 - requirements.txt - requirements.txt: text of the python packages required to run this project  
-- Sparkify_Exploratory_Analysis_Feature_Engineering.ipynb - notebook that explores the data and generates features     
-- Sparkify_Modeling.ipynb - notebook that finds the best classifier, parameters, and features to predict churn among users  
-- mini_sparkify_event_data.json - event data from the Sparkify service   
+- local_Spark_ETL_modeling
+    - Sparkify_Exploratory_Analysis_Feature_Engineering.ipynb - notebook that explores the data and generates features     
+    - Sparkify_Modeling.ipynb - notebook that finds the best classifier, parameters, and features to predict churn among users  
+    - mini_sparkify_event_data.json - event data from the Sparkify service   
+- AWS_EMR_ETL
+    - dl.cfg - configuration file with AWS access keys
+    - etl.py - contains the ETL job that extracts the data from S3, transforms the data, and loads it back into S3.
 - blogpost.md - blog post about the findings from analysis in this repository  
-- 25 images files in the 'images' directory: images for the blogpost
+- images files in the 'images' directory: images for the blogpost
   
   
 ## Results  
@@ -75,4 +79,10 @@ Ultimately we improved our model by 5% and we found the most crucial features.
   
   
 ## Next Steps  
-Productionalize this model and deploy it on the Spark cluster on the full dataset on AWS.  
+Productionalize this model and deploy it on Sparkify's preferred cloud computing service.  
+I propose that Sparkify:    
+  
+1. ETL (extract transform load) the full dataset in bulk.  
+2. Update the model with a much larger dataset. 
+3. Set up a workflow to ETL new data as it comes in.  
+4. Set up another workflow to predict users at risk of churn using the updated model.  
