@@ -124,8 +124,8 @@ Overall, it appears that users who churned did not cancel the services because o
   
 ## Feature Engineering (Wednesday)   
    
-![Chill Day at Work](https://github.com/janniec/PySparkify/blob/main/images/relaxed-calm-work.jpg)  
-image source: [dreamstime.com](https://www.dreamstime.com/photos-images/relief-peace.html)  
+![In the Zone at Work](https://github.com/janniec/PySparkify/blob/main/images/zoned_out_work.png)  
+image source: [forbes.com](https://www.forbes.com/sites/forbescommunicationscouncil/2024/02/15/is-do-it-yourself-the-best-kind-of-marketing-technology/)  
   
 I am anticipating that the data processing required to generate features will be the most time consuming aspect of this project. (Once I write the code to generate the features, I can relax and just troubleshoot as needed.) And we should aim to minimize this step in the future for the full data set. As such, I plan to be more comprehensive with the features generate for the subset, and incorporate feature selection as part of the modeling experiments. 
   
@@ -311,9 +311,19 @@ Because data processing took so long, I continued my experiments to include feat
 Ultimately I improved the model by 5% and I found the most crucial features. I expect this model would improve even further when it is trained on a much larger set of the data.  
    
 ## Next Steps (Next Week)   
+![Collaboration](https://github.com/janniec/PySparkify/blob/main/images/collaboration.png) 
+image source: [linkedin.com](https://www.linkedin.com/pulse/power-pair-programming-rotation-mobbing-extreme-thomas-fuller/)    
   
-If the Product Managers tells me that speed is of the essense, I will continue with the third model.  However, if she prefers a model with more accuracy, I will continue with second model and deploy it on the full dataset on the AWS cluster next week.  
+If the Product Manager tells me that speed is of the essense, I will continue with the third model.  However, if she prefers a model with more accuracy, I will continue with second model and deploy it on the full dataset on the AWS cluster next week.  
   
+### Deployment to Production  
+  
+To identify the users at risk of churn, at scale and in production, I work with the Data Engineers to deploy our model through Sparkify's preferred cloud computing service, AWS. I propose that we:    
+  
+1. ETL (extract transform load) our full dataset in bulk.  
+2. Update our model with a much larger dataset. 
+3. Set up a workflow to ETL new data as it comes in.  
+4. Set up another workflow to predict users at risk of churn using our updated model.  
   
 ### Reflection   
     
