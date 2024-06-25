@@ -16,7 +16,7 @@ os.environ['AWS_SECRET_ACCESS_KEY']=config['AWS']['AWS_SECRET_ACCESS_KEY']
 
 INPUT_DATA = 's3n://udacity-dsnd/sparkify/mini_sparkify_event_data.json' # mini dataset
 # INPUT_DATA = 's3n://udacity-dsnd/sparkify/sparkify_event_data.json' # full dataset
-OUTPUT_DIRECTORY = "s3a://sparkify-etl/"
+OUTPUT_DIRECTORY = "s3a://sparkify/"
 
 
 def create_spark_session():
@@ -333,10 +333,12 @@ def main():
     
     # read input data
     input_data = spark.read.json(INPUT_DATA)
+    
     # create output data
     output_data = create_dataset(input_data)
+    
     # write output data
-    output_data.write.mode("overwrite").parquet(path=OUTPUT_DIRECTORY + 'churn_model_dataset/')
+    output_data.write.mode("overwrite").parquet(path=OUTPUT_DIRECTORY + 'model_dataset/')
     
     # stop spark session
     spark.stop()
