@@ -57,11 +57,8 @@ PySpark is a distributed processing system that will distribute data across a cl
     - Sparkify_Exploratory_Analysis_Feature_Engineering.ipynb - notebook that explores the data and generates features     
     - Sparkify_Modeling.ipynb - notebook that finds the best classifier, parameters, and features to predict churn among users  
     - mini_sparkify_event_data.json - event data from the Sparkify service   
-- AWS_EMR_ETL
-    - dl.cfg - configuration file with AWS access keys
-    - etl.py - contains the ETL job that extracts the data from S3, transforms the data, and loads it back into S3.
-- blogpost.md - blog post about the findings from analysis in this repository  
-- images files in the 'images' directory: images for the blogpost
+- AWS_EMR_ETL_predictions - Contains files to deploy this project on AWS EMR. See [README in the folder for more info](https://github.com/janniec/PySparkify/blob/main/AWS_EMR_ETL_predictions/README.md).
+- blogpost.md - blog post about the findings from analysis in this repository    
   
   
 ## Results  
