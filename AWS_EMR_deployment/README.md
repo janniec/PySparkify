@@ -26,6 +26,6 @@ This will allow the company to identify users at risk of churn at scale.
 ## Next Steps   
 Schedule the jobs to run in periodic batches.   
 1. Update the ETL job to transform data in daily batches.  
-2. set up a model evaluation job, to be used as a condition to update the model.  
+2. Set up a model evaluation job, to be used as a condition to update the model.  
 3. Update the Predict job to load the most recent model and only predict on daily batches.  
 4. Set up an Airflow DAG to schedule the jobs.  
